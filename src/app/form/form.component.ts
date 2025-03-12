@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, WritableSignal } from '@angular/core';
 
 @Component({
   selector: 'app-form',
@@ -7,9 +7,10 @@ import { Component, Input } from '@angular/core';
   styleUrl: './form.component.css',
 })
 export class FormComponent {
-  number: number = 0;
-  updateCounter(num: number) {
-    this.number = num;
+  @Input({ required: true }) counter!: WritableSignal<number>;
+
+  updateCounter(number: number) {
+    console.log('updating now', number);
+    this.counter.set(number);
   }
-  
 }

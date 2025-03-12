@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, WritableSignal } from '@angular/core';
 
 @Component({
   selector: 'app-counter',
@@ -7,13 +7,13 @@ import { Component, Input } from '@angular/core';
   styleUrl: './counter.component.css',
 })
 export class CounterComponent {
-  counter: number = 0;
+  @Input() counter!: WritableSignal<number>;
 
   increase() {
-    this.counter++;
+    this.counter.set(this.counter() + 1);
   }
 
   decrease() {
-    this.counter--;
+    this.counter.set(this.counter() - 1);
   }
 }
